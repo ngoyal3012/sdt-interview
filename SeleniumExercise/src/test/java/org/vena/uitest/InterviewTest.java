@@ -3,7 +3,6 @@ package org.vena.uitest;
 import applicationpages.manager.CreateModalPage;
 import applicationpages.manager.ManagerPage;
 import java.util.concurrent.TimeUnit;
-import junit.runner.BaseTestRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -50,7 +49,7 @@ public class InterviewTest extends BaseTest {
 		driver.get("https://dev.vena.io");
 		driver.findElement(By.id("email")).sendKeys(credentials.getUsername());
 		driver.findElement(By.id("password")).sendKeys(credentials.getPassword());
-		driver.findElement(By.cssSelector("[data-testid*='login-button']")).click();
+		driver.findElement(By.cssSelector("[data-testid*='login-pw']")).click();
 		driver.manage().timeouts().implicitlyWait(30L, TimeUnit.MILLISECONDS);
 		assertNotNull(driver.findElement(By.cssSelector("[name='new_manager']")));
 		String userName = driver.findElement(By.id("accountTab")).getText();
