@@ -9,7 +9,6 @@ import api.resources.LoginResource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Arrays;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -33,5 +32,4 @@ public class BaseTest {
 		FolderDTO[] folders = FoldersResource.list(getAdminToken());
 		Arrays.stream(folders).forEach(folder -> FoldersResource.delete(getAdminToken(), folder.id));
 	}
-
 }
