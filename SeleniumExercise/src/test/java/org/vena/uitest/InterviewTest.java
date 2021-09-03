@@ -12,11 +12,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.vena.BaseTest;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 
-public class InterviewTest {
+public class InterviewTest extends BaseTest {
 	private WebDriver driver;
 
 	private static ManagerPage managerPage;
@@ -46,8 +47,8 @@ public class InterviewTest {
 	@Test(priority = 1)
 	public void testLogin() {
 		driver.get("https://dev.vena.io");
-		driver.findElement(By.id("email")).sendKeys("");
-		driver.findElement(By.id("password")).sendKeys("");
+		driver.findElement(By.id("email")).sendKeys(credentials.getUsername());
+		driver.findElement(By.id("password")).sendKeys(credentials.getPassword());
 		driver.findElement(By.cssSelector("[data-testid*='login-pw']")).click();
 		driver.manage().timeouts().implicitlyWait(30L, TimeUnit.MILLISECONDS);
 		assertNotNull(driver.findElement(By.cssSelector("[name='new_manager']")));
@@ -99,5 +100,6 @@ public class InterviewTest {
 	@AfterClass (alwaysRun = true)
 	public void teardown() {
 		driver.close();
+		deleteAllCustomFolders();
 	}
 }
