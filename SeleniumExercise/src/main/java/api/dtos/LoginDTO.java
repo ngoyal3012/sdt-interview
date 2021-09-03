@@ -9,7 +9,7 @@ public class LoginDTO {
 	public String sessionKey;
 	public String analyticsEndpoint;
 	public String location;
-	public Boolean websocketsEnabled; // FIXME: No longer returned by the server but needed temporarily to support cross-region login tests.
+	public Boolean websocketsEnabled;
 	public Boolean twoAuthEnabled;
 	public Boolean expired;
 	public String token;
@@ -25,6 +25,7 @@ public class LoginDTO {
 	public String trialVersion;
 	public String status;
 	public String phoneNumber;
+	public boolean canChangePassword;
 
 	public enum LoginType {
 		ANY, CONTRIBUTOR, MANAGER, ADMIN, MODELER, DASHBOARDER, REPORTER
