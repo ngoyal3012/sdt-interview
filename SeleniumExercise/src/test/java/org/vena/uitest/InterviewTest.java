@@ -2,13 +2,13 @@ package org.vena.uitest;
 
 import applicationpages.manager.CreateModalPage;
 import applicationpages.manager.ManagerPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -24,23 +24,9 @@ public class InterviewTest extends BaseTest {
 
 	@BeforeClass
 	public void setUp() {
-		String DRIVER_PATH = "./src/main/resources/drivers/";
+		WebDriverManager.chromedriver().setup();
 
-		//Check OS and pick correct driver, default is windows
-		String OS = System.getProperty("os.name");
-		if (OS.contains("Mac")) {
-			DRIVER_PATH += "mac/chromedriver";
-		} else if (OS.contains("Linux")) {
-			DRIVER_PATH += "linux/chromedriver";
-		} else {
-			DRIVER_PATH += "windows/chromedriver.exe";
-		}
-
-		System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("window-size=1920,1080");
-
-		driver = new ChromeDriver(options);
+		driver = new ChromeDriver();
 		driver.manage().window().setSize(new Dimension(1920, 1080));
 	}
 
@@ -51,7 +37,7 @@ public class InterviewTest extends BaseTest {
 		driver.findElement(By.id("password")).sendKeys(credentials.getPassword());
 		driver.findElement(By.cssSelector("[data-testid*='login-pw']")).click();
 		driver.manage().timeouts().implicitlyWait(30L, TimeUnit.MILLISECONDS);
-		assertNotNull(driver.findElement(By.cssSelector("[name='new_manager']")));
+		assertNotNull(driver.findElement(By.cssSelector("[name='manager']")));
 		String userName = driver.findElement(By.id("accountTab")).getText();
 		assertEquals(userName, "Admin User");
 	}
@@ -99,7 +85,7 @@ public class InterviewTest extends BaseTest {
 
 	@AfterClass (alwaysRun = true)
 	public void teardown() {
-		driver.close();
+		driver.quit();
 		deleteAllCustomFolders();
 	}
 }
