@@ -26,6 +26,7 @@ public class LoginDTO {
 	public String status;
 	public String phoneNumber;
 	public boolean canChangePassword;
+	public String organizationType;
 
 	public enum LoginType {
 		ANY, CONTRIBUTOR, MANAGER, ADMIN, MODELER, DASHBOARDER, REPORTER
